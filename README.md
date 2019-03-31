@@ -10,4 +10,4 @@ npm i -g @rainsho/rr-cli
 
 ## useage
 
-refer to [CHANGELOG](./CHAGNGELOG.md)
+refer to [CHANGELOG](./CHANGELOG.md)
