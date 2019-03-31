@@ -7,3 +7,7 @@ A not cool personal use CLI.
 ```bash
 npm i -g @rainsho/rr-cli
 ```
+
+## useage
+
+refer to [CHANGELOG](./CHAGNGELOG.md)
