@@ -3,8 +3,8 @@ import { basename, extname } from 'path';
 
 export interface RenameArgv {
   pattern: string;
-  dryRun?: boolean;
   target?: string;
+  yes?: boolean;
 }
 
 function defaultTarget(argv: RenameArgv): string {
@@ -23,26 +23,27 @@ export default function rename(argv: RenameArgv) {
   const pattern = new RegExp(argv.pattern);
   const target = defaultTarget(argv);
 
-  const files = fs.readdirSync(cwd).filter(file => pattern.exec(file) && !/^\./.test(file));
-  const tasks = files
+  const tasks = fs
+    .readdirSync(cwd)
+    .filter(file => pattern.exec(file) && !/^\./.exec(file))
     .map(file => {
       const ext = extname(file);
       const name = basename(file, ext);
 
       const seg = /(S\d{2}E\d{2})/.exec(name);
-      const number = seg ? seg[1] : '';
+      const number = seg ? ` ${seg[1]}` : '';
 
-      return { src: file, dest: `${target} ${number}${ext}` };
+      return { src: file, dest: `${target}${number}${ext}` };
     })
     .filter(({ src, dest }) => src !== dest);
 
   if (!tasks.length) console.log('NO FILES TO RENMAE?!');
 
   tasks.forEach(({ src, dest }) => {
-    if (argv.dryRun) {
-      console.log(src, '->', dest);
-    } else {
+    if (argv.yes) {
       fs.move(src, dest, () => console.log(src, 'done!'));
+    } else {
+      console.log(src, '->', dest);
     }
   });
 }
