@@ -1,4 +1,13 @@
-# CHANGELOG
+## 0.0.02
+
+- add: `rr ping` to ping one or more hosts and ports
+
+  ```bash
+  # ping a host's HTTP(80) port
+  rr ping baidu.com
+  # ping a batch hosts and ports
+  rr ping -p 80,443,8080 baidu.com google.com
+  ```
 
 ## 0.0.1
 
