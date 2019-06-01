@@ -7,7 +7,6 @@ program
   .option('-y, --yes', 'confirm')
   .option('-p, --pattern <p>', 'source name pattern')
   .option('-t, --target <t>', 'target name pattern')
-  // .option('-s, --series', 'enable series marker')
   .parse(process.argv);
 
 const { yes, pattern, target } = program;
