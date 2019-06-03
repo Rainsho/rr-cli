@@ -1,4 +1,4 @@
-## 0.0.02
+## 0.0.2
 
 - add: `rr ping` to ping one or more hosts and ports
 
