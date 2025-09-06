@@ -30,8 +30,8 @@ export default function rename(argv: RenameArgv) {
       const ext = extname(file);
       const name = basename(file, ext);
 
-      const seg = /(S\d{2}E\d{2})/.exec(name);
-      const number = seg ? ` ${seg[1]}` : '';
+      const seg = /(S\d{2}E\d{2})/i.exec(name);
+      const number = seg ? ` ${seg[1]}`.toUpperCase() : '';
 
       return { src: file, dest: `${target}${number}${ext}` };
     })
