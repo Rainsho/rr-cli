@@ -11,4 +11,5 @@ program
   .alias('rn')
   .command('ping [hosts]', 'ping one or more hosts')
   .alias('p')
+  .command('ass', 'auto rename movies and subtitles')
   .parse(process.argv);
