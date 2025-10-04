@@ -32,7 +32,7 @@ export default function ass(argv: AssArgv) {
 
   const tasks: { src: string; dest: string }[] = [];
 
-  // Process each media file
+  // Process media file(s)
   mediaFiles.forEach(mediaFile => {
     const mediaExt = extname(mediaFile);
     const newName = extractMovieName(mediaFile);
@@ -42,14 +42,16 @@ export default function ass(argv: AssArgv) {
       tasks.push({ src: mediaFile, dest: newMediaName });
     }
 
-    // Find and rename corresponding subtitle files
+    // When there's only one media file, rename all subtitle files according to it
+    // Otherwise, only rename matching subtitle files
+    const shouldRenameAll = mediaFiles.length === 1;
     subtitleFiles.forEach(subtitleFile => {
       const subtitleExt = extname(subtitleFile);
       const subtitleBase = basename(subtitleFile, subtitleExt);
       const mediaBase = basename(mediaFile, mediaExt);
 
-      // If subtitle filename contains media filename or vice versa, consider them as matching
-      if (subtitleBase.includes(mediaBase) || mediaBase.includes(subtitleBase)) {
+      // If there's only one media file, or subtitle filename matches media filename
+      if (shouldRenameAll || subtitleBase.includes(mediaBase) || mediaBase.includes(subtitleBase)) {
         const newSubtitleName = `${newName}${subtitleExt}`;
         if (subtitleFile !== newSubtitleName) {
           tasks.push({ src: subtitleFile, dest: newSubtitleName });
