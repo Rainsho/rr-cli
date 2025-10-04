@@ -37,7 +37,7 @@ export default function rename(argv: RenameArgv) {
     })
     .filter(({ src, dest }) => src !== dest);
 
-  if (!tasks.length) console.log('NO FILES TO RENMAE?!');
+  if (!tasks.length) console.log('NO FILES TO RENAME?!');
 
   tasks.forEach(({ src, dest }) => {
     if (argv.yes) {

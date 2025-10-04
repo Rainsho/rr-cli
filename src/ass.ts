@@ -30,7 +30,7 @@ export default function ass(argv: AssArgv) {
   // Find subtitle files
   const subtitleFiles = files.filter(file => /\.(ass|srt)$/i.test(file) && !/^\./.test(file));
 
-  const tasks: Array<{ src: string; dest: string }> = [];
+  const tasks: { src: string; dest: string }[] = [];
 
   // Process each media file
   mediaFiles.forEach(mediaFile => {
